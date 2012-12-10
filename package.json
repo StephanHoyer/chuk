@@ -1,0 +1,22 @@
+{
+  "name": "chuck",
+  "version": "0.0.1",
+  "description": "Run any arbitrary code before REPL starts",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": "git://github.com/stephanhoyer/chuk.git",
+  "author": [
+    "Mario Behrendt <info@mario-behrendt.de>",
+    "Stephan Hoyer <ste.hoyer@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "1.7.3",
+    "gently": "*",
+    "should": "1.2.1"
+  }
+}

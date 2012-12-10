@@ -1,0 +1,5 @@
+--require should
+--bail
+--ui bdd
+--slow 100
+--ignore-leaks
