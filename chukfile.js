@@ -1,3 +1,3 @@
 module.exports = function(scope) {
-  scope.cb = require('./lib/cb');
+  scope.cb = require('./lib/cb')(scope);
 };
