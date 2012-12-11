@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var env = process.argv[2] || 'default';
+
+require('../lib/index.js')(env);

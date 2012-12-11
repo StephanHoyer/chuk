@@ -10,7 +10,6 @@ module.exports = {
   },
 
   'default': function(scope) {
-    scope.default = 1;
     console.log('default');
   }
 };
