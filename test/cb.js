@@ -1,24 +1,25 @@
-var gently = new (require('gently'));
-
-var cb = require('../lib/cb');
+var gently = new (require('gently'))
+  , cb = require('../lib/cb');
 
 describe('cb', function() {
-  it('should add argument to global scope and log out to console', function(done) {
+  it('should add argument to context scope and log out to console', function(done) {
+    var context = {};
     gently.expect(console, 'log', function(thing) {
       thing.should.equal('_0 = foo');
       done();
     });
-    cb('foo');
-    global.should.have.property('_0');
-    global._0.should.equal('foo');
+    cb(context)('foo');
+    context.should.have.property('_0');
+    context._0.should.equal('foo');
   });
 
-  it('should add all arguments to global scope', function() {
+  it('should add all arguments to context scope', function() {
+    var context = {};
     gently.expect(console, 'log', 2);
-    cb('foo', 'bar');
-    global.should.have.property('_0');
-    global._0.should.equal('foo');
-    global.should.have.property('_1');
-    global._1.should.equal('bar');
+    cb(context)('foo', 'bar');
+    context.should.have.property('_0');
+    context._0.should.equal('foo');
+    context.should.have.property('_1');
+    context._1.should.equal('bar');
   });
 });
