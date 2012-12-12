@@ -1,5 +1,5 @@
 {
-  "name": "chuck",
+  "name": "chuk",
   "version": "0.0.1",
   "description": "Run any arbitrary code before REPL starts",
   "main": "index.js",
@@ -13,6 +13,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+  },
+  "bin": {
+    "chuk": "./bin/chuk"
   },
   "devDependencies": {
     "mocha": "1.7.3",
