@@ -1,6 +1,6 @@
 # chuk
 
-Run any arbitrary code before REPL starts
+Run any arbitrary code before REPL starts.
 
 ## Installation
 
