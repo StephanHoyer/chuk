@@ -1,3 +1,5 @@
+// vim:set ft=javascript:
+
 module.exports = {
   'foo': function(scope) {
     scope.foo = 1;
