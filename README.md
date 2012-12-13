@@ -19,9 +19,11 @@ going up create a file called `Chukfile` in you projects root dir.
 
 The simplest Chukfile may look like this:
 
-  module.exports = function(scope) {
-    scope.a = 1;
-  }
+```js
+module.exports = function(scope) {
+  scope.a = 1;
+}
+```
 
 As you can see, it contains just JavaScript code. This Chukfile simply exports
 one function with one parameter. The function is called at the startup of the
