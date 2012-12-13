@@ -2,13 +2,13 @@
 
 Run any arbitrary code before REPL starts
 
-# Installation
+## Installation
 
 ```bash
 $ npm install chuk -g
 ```
 
-# Usage
+## Usage
 
 If you've install *chuk* globaly as recommended you should be able to run the
 chuk repl by just typing `chuk` instead of `node`. This should start a normal
@@ -32,16 +32,38 @@ the file above should give you a variable `a = 1` from start on.
 
 ## Advanced usage
 
+Sometimes you want to have different code run on different tasks. Maybe you
+want to initialize the database if your debugging model code and you want to
+initialize a rest service if you want to test something there. This can be
+achived easily by extending the `Chukfile` like so:
 
+```js
+module.exports = {
+  "db": function(scope) {
+    // DB init goes here
+  },
+  "rest": function(scope) {
+    // REST init goes here
+  }
+}
+```
 
-# Running the tests
+If you now type
+
+```bash
+$ chuk db
+```
+
+to your shell, only the db section is loaded.
+
+## Running the tests
 
 ```bash
 $ npm install
 $ make test
 ```
 
-# License
+## License
 
 (The MIT License)
 
