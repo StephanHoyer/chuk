@@ -63,6 +63,10 @@ $ npm install
 $ make test
 ```
 
+## Plugins
+
+[chuk-cb](https://github.com/StephanHoyer/chuk-cb) - simplifys writing callbacks in REPL session
+
 ## License
 
 (The MIT License)
