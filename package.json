@@ -1,6 +1,6 @@
 {
   "name": "chuk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Run any arbitrary code before REPL starts",
   "main": "index.js",
   "scripts": {
