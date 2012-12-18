@@ -1,5 +1,5 @@
 // vim:set ft=javascript:
 
 module.exports = function(scope) {
-  scope.cb = require('./lib/cb')(scope);
+  scope.cb = require('chuk-cb')(scope);
 };

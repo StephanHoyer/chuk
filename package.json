@@ -10,7 +10,9 @@
   "author": "Stephan Hoyer <ste.hoyer@gmail.com>",
   "contributors": ["Mario Behrendt <info@mario-behrendt.de>"],
   "license": "MIT",
-  "dependencies": { },
+  "dependencies": {
+    "chuk-cb": "*"
+  },
   "bin": {
     "chuk": "./bin/chuk"
   },
