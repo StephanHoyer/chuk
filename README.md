@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/StephanHoyer/chuk.png?branch=master)](https://travis-ci.org/StephanHoyer/chuk)
+
 # chuk
 
 Run any arbitrary code before REPL starts.
