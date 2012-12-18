@@ -67,7 +67,7 @@ $ make test
 
 ## Plugins
 
-[chuk-cb](https://github.com/StephanHoyer/chuk-cb) - simplifys writing callbacks in REPL session
+[chuk-cb](./chuk-cb) - simplifys writing callbacks in REPL session
 
 ## License
 
