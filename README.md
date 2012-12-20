@@ -58,6 +58,17 @@ $ chuk db
 
 to your shell, only the db section is loaded.
 
+## REPL history
+
+`chuk` automatically writes entered commands into a history file, which is then used to populate the repl's history on next boot of `chuk`.
+By default the file `.repl_history` within the current execution folder is used, but this can be changed by the setting the environment variable `REPL_HISTORY` like:
+
+```bash
+REPL_HISTORY='.custom_history' chuk
+```
+
+Using the env variable, one could maintain multiple separate history files within a single project for both writing and reading, which can be handy under special circumstances.
+
 ## Running the tests
 
 ```bash
