@@ -1,6 +1,7 @@
-var chuk  = require('../')
-  , mockery = require('mockery')
-  , fs    = require('fs')
+var chuk      = require('../')
+  , fs        = require('fs')
+  , pathextra = require('path-extra')
+  , testutil  = require('testutil')
   , repl
   , config = {
   'foo': function(context) {
@@ -43,24 +44,14 @@ describe('chuk', function() {
 
   it('should write to default history file', function() {
     var command = 'var i = 1;'
-      , path    = '.repl_history'
-      , history = null
-      , fsMock  = {
-          readFileSync: function (path) { return history; },
-          existsSync:   function (path) { return history !== null; },
-          openSync:     function (path) { return {history: history}; },
-          write:        function (handle, string) { handle.history += string; }
-      };
-    mockery.enable({
-      warnOnUnregistered: false
-    });
-    mockery.registerMock('fs', fsMock);
+      , DIR     = testutil.createTempDir()
+      , path    = process.env.REPL_HISTORY = pathextra.join(DIR, '.repl_history');
+
     repl = chuk(null, config);
     repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
     fs.readFileSync(path, 'utf-8').should.include(command);
     fs.unlink(path);
-    mockery.disable();
   });
 
   it('should use specified file if REPL_HISTORY is set', function() {

@@ -20,6 +20,7 @@
     "mocha": "1.7.3",
     "gently": "0.9.2",
     "should": "1.2.1",
-    "mockery": "1.4.0"
+    "path-extra": "0.0.x",
+    "testutil": "~0.2.4"
   }
 }
