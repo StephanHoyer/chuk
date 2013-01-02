@@ -1,4 +1,5 @@
 var chuk  = require('../')
+  , mockery = require('mockery')
   , fs    = require('fs')
   , repl
   , config = {
@@ -42,13 +43,24 @@ describe('chuk', function() {
 
   it('should write to default history file', function() {
     var command = 'var i = 1;'
-      , path    = process.env.REPL_HISTORY = '/tmp/.repl_history';
-
+      , path    = '.repl_history'
+      , history = null
+      , fsMock  = {
+          readFileSync: function (path) { return history; },
+          existsSync:   function (path) { return history !== null; },
+          openSync:     function (path) { return {history: history}; },
+          write:        function (handle, string) { handle.history += string; }
+      };
+    mockery.enable({
+      warnOnUnregistered: false
+    });
+    mockery.registerMock('fs', fsMock);
     repl = chuk(null, config);
-    repl.rli.emit('line', command)
+    repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
     fs.readFileSync(path, 'utf-8').should.include(command);
     fs.unlink(path);
+    mockery.disable();
   });
 
   it('should use specified file if REPL_HISTORY is set', function() {
@@ -57,9 +69,9 @@ describe('chuk', function() {
 
     process.env.REPL_HISTORY = path;
     repl = chuk(null, config);
-    repl.rli.emit('line', command)
+    repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
     fs.readFileSync(path, 'utf-8').should.include(command);
     process.env.REPL_HISTORY = undefined;
-  })
+  });
 });
