@@ -42,7 +42,7 @@ describe('chuk', function() {
 
   it('should write to default history file', function() {
     var command = 'var i = 1;'
-      , path    = '.repl_history';
+      , path    = process.env.REPL_HISTORY = '/tmp/.repl_history';
 
     repl = chuk(null, config);
     repl.rli.emit('line', command)
