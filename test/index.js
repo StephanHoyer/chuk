@@ -2,7 +2,6 @@ var chuk      = require('../')
   , fs        = require('fs')
   , pathextra = require('path-extra')
   , testutil  = require('testutil')
-  , DIR       = testutil.createTempDir()
   , repl
   , config = {
   'foo': function(context) {
@@ -45,7 +44,9 @@ describe('chuk', function() {
 
   it('should write to default history file', function() {
     var command = 'var i = 1;'
-      , path    = process.env.REPL_HISTORY = pathextra.join(DIR, '.repl_history');
+      , path    = pathextra.join(testutil.createTempDir, '.repl_history');
+
+    process.env.REPL_HISTORY = path;
 
     repl = chuk(null, config);
     repl.rli.emit('line', command);
@@ -56,7 +57,7 @@ describe('chuk', function() {
 
   it('should use specified file if REPL_HISTORY is set', function() {
     var command = 'var f = function() { return true };'
-      , path    = pathextra.join(DIR, '.custom_history');
+      , path    = pathextra.join(testutil.createTempDir(), '.custom_history');
 
     process.env.REPL_HISTORY = path;
     repl = chuk(null, config);
