@@ -49,10 +49,12 @@ describe('chuk', function() {
     process.env.REPL_HISTORY = path;
 
     repl = chuk(null, config);
+
     repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
     fs.readFileSync(path, 'utf-8').should.include(command);
     fs.unlink(path);
+    repl = null;
   });
 
   it('should use specified file if REPL_HISTORY is set', function() {
@@ -60,7 +62,9 @@ describe('chuk', function() {
       , path    = pathextra.join(testutil.createTempDir(), '.custom_history');
 
     process.env.REPL_HISTORY = path;
+
     repl = chuk(null, config);
+
     repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
     fs.readFileSync(path, 'utf-8').should.include(command);
