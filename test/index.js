@@ -1,7 +1,7 @@
 var chuk      = require('../')
   , fs        = require('fs')
-  , pathextra = require('path-extra')
-  , testutil  = require('testutil')
+  , sinon     = require('sinon')
+  , spy       = sinon.spy(fs, 'write')
   , repl
   , config = {
   'foo': function(context) {
@@ -16,16 +16,15 @@ var chuk      = require('../')
 };
 
 describe('chuk', function() {
-  it('should load chukfile configuration if it\'s a function', function(done) {
+  it('should load chukfile configuration if it\'s a function', function() {
     repl = chuk(null, function(context) {
       context.foo = 'bar';
     });
     repl.context.global.should.have.property('foo');
     repl.context.global.foo.should.equal('bar');
-    done();
   });
 
-  it('should load chukfile configuration for given env', function(done) {
+  it('should load chukfile configuration for given env', function() {
     repl = chuk('foo', config);
     repl.context.global.should.have.property('foo');
     repl.context.global.should.not.have.property('bar');
@@ -34,35 +33,30 @@ describe('chuk', function() {
     repl.context.global.should.not.have.property('foo');
     repl.context.global.should.have.property('bar');
     repl.context.global.bar.should.equal(123);
-    done();
   });
 
-  it('should load default configuration if no env given', function(done) {
+  it('should load default configuration if no env given', function() {
     repl = chuk(null, config);
     repl.context.global.should.have.property('foo');
     repl.context.global.should.not.have.property('bar');
     repl.context.global.foo.should.equal('default');
-    done();
   });
 
-  it('should write to default history file', function(done) {
+  it('should write to default history file', function() {
     var command = 'var i = 1;'
-      , path    = pathextra.join(testutil.createTempDir, '.repl_history');
-
-    process.env.REPL_HISTORY = path;
+      , path    = '.repl_history';
 
     repl = chuk(null, config);
 
     repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
-    fs.readFileSync(path, 'utf-8').should.include(command);
+    spy.lastCall.args[1].should.include(command);
     fs.unlink(path);
-    done();
   });
 
-  it('should use specified file if REPL_HISTORY is set', function(done) {
+  it('should use specified file if REPL_HISTORY is set', function() {
     var command = 'var f = function() { return true };'
-      , path    = pathextra.join(testutil.createTempDir(), '.custom_history');
+      , path    = '.custom_history';
 
     process.env.REPL_HISTORY = path;
 
@@ -70,8 +64,7 @@ describe('chuk', function() {
 
     repl.rli.emit('line', command);
     fs.existsSync(path).should.be.true;
-    fs.readFileSync(path, 'utf-8').should.include(command);
+    spy.lastCall.args[1].should.include(command);
     process.env.REPL_HISTORY = undefined;
-    done();
   });
 });
