@@ -17,9 +17,9 @@
     "chuk": "./bin/chuk"
   },
   "devDependencies": {
-    "mocha": "1.7.3",
-    "gently": "0.9.2",
-    "should": "1.2.1",
-    "sinon": "1.5.2"
+    "mocha": "3.1.2",
+    "gently": "0.10.0",
+    "should": "11.1.1",
+    "sinon": "1.17.6"
   }
 }
